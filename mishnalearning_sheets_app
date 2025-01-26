@@ -11,34 +11,37 @@ function updateSpreadsheet() {
     {
     "Order": "Zera'im","Tractates":
     [
-    {"Tractate": "Berakhot", "Total Chapters": 9, "Total Mishnas": 57, "Chapters": [6, 8, 7, 8, 6, 7, 7, 8, 8], "Bavli Pages": 64, "Yerushalmi Pages": 94},
-    {"Tractate": "Pe'ah", "Total Chapters": 8, "Total Mishnas": 69, "Chapters": [9, 10, 7, 8, 10, 7, 9, 9]},
-    {"Tractate":"Demai","Total Chapters":7,"Total Mishnas":53,"Chapters":[8,7,8,7,8,7,8]},
-    {"Tractate":"Kil'ayim","Total Chapters":9,"Total Mishnas":77,"Chapters":[9,8,9,8,7,7,7,8,10]},
-    {"Tractate":"Shevi'it","Total Chapters":10,"Total Mishnas":89,"Chapters":[8,9,10,9,7,7,9,8,8,7]},
-    {"Tractate":"Terumot","Total Chapters":11,"Total Mishnas":101,"Chapters":[9,10,10,8,8,9,8,9,10,10,9]},
-    {"Tractate":"Ma'aserot","Total Chapters":5,"Total Mishnas":40,"Chapters":[8,7,8,8,9]},
-    {"Tractate":"Ma'aserSheni","Total Chapters":5,"Total Mishnas":57,"Chapters":[12,10,11,10,14]},
-    {"Tractate":"Challah","Total Chapters":4,"Total Mishnas":38,"Chapters":[9,7,10,12]},
-    {"Tractate":"Orlah","Total Chapters":3,"Total Mishnas":35,"Chapters":[12,11,12]},
-    {"Tractate":"Bikkurim","Total Chapters":4,"Total Mishnas":39,"Chapters":[10,10,9,10]}
-    ]
+  {"Tractate": "Berakhot", "Total Chapters": 9, "Total Mishnas": 57, "Chapters": [5, 8, 6, 7, 5, 8, 5, 8, 5], "Bavli Pages": 64, "Yerushalmi Pages": 94},
+  {"Tractate": "Peah", "Total Chapters": 8, "Total Mishnas": 69, "Chapters": [6, 8, 8, 11, 8, 11, 8, 9], "Bavli Pages": 69, "Yerushalmi Pages": 103},
+  {"Tractate": "Damai", "Total Chapters": 7, "Total Mishnas": 53, "Chapters": [4, 5, 6, 7, 11, 12, 8], "Bavli Pages": 75, "Yerushalmi Pages": 85},
+  {"Tractate": "Kilaim", "Total Chapters": 9, "Total Mishnas": 77, "Chapters": [9, 11, 7, 9, 8, 9, 8, 6, 10], "Bavli Pages": 102, "Yerushalmi Pages": 112},
+  {"Tractate": "Sheviit", "Total Chapters": 10, "Total Mishnas": 89, "Chapters": [8, 10, 10, 10, 9, 6, 7, 11, 9, 9], "Bavli Pages": 119, "Yerushalmi Pages": 129},
+  {"Tractate": "Terumot", "Total Chapters": 11, "Total Mishnas": 101, "Chapters": [10, 6, 9, 13, 9, 6, 7, 12, 7, 12, 10], "Bavli Pages": 132, "Yerushalmi Pages": 146},
+  {"Tractate": "Maserot", "Total Chapters": 5, "Total Mishnas": 40, "Chapters": [8, 8, 10, 6, 8], "Bavli Pages": 51, "Yerushalmi Pages": 65},
+  {"Tractate": "Maser Sheni", "Total Chapters": 5, "Total Mishnas": 57, "Chapters": [7, 10, 13, 12, 15], "Bavli Pages": 72, "Yerushalmi Pages": 86},
+  {"Tractate": "Chalah", "Total Chapters": 4, "Total Mishnas": 38, "Chapters": [9, 8, 10, 11], "Bavli Pages": 45, "Yerushalmi Pages": 60},
+  {"Tractate": "Orlah", "Total Chapters": 3, "Total Mishnas": 35, "Chapters": [9, 17, 9], "Bavli Pages": 39, "Yerushalmi Pages": 55}
+]
+
     },
     {
     "Order": "Moed","Tractates":
     [
-  {"Tractate": "Shabbat", "Total Chapters": 24, "Total Mishnas": 139, "Chapters": [5, 7, 4, 6, 3, 6, 5, 6, 7, 6, 5, 6, 5, 3, 6, 8, 8, 10, 6, 7, 4, 3, 6, 8]},
-  {"Tractate": "Eruvin", "Total Chapters": 10, "Total Mishnas": 96, "Chapters": [10, 6, 7, 7, 9, 6, 6, 10, 15, 20]},
-  {"Tractate": "Pesachim", "Total Chapters": 10, "Total Mishnas": 89, "Chapters": [7, 8, 8, 9, 10, 6, 13, 8, 11, 9]},
-  {"Tractate": "Shekalim", "Total Chapters": 8, "Total Mishnas": 51, "Chapters": [6, 5, 6, 9, 6, 6, 6, 7]},
-  {"Tractate": "Yoma", "Total Chapters": 8, "Total Mishnas": 61, "Chapters": [8, 7, 11, 6, 7, 8, 5, 9]},
-  {"Tractate": "Sukkah", "Total Chapters": 5, "Total Mishnas": 53, "Chapters": [7, 15, 10, 8, 13]},
-  {"Tractate": "Beitzah", "Total Chapters": 5, "Total Mishnas": 39, "Chapters": [5, 8, 8, 9, 9]},
-  {"Tractate": "Rosh Hashanah", "Total Chapters": 4, "Total Mishnas": 35, "Chapters": [9, 9, 8, 9]},
-  {"Tractate": "Ta'anit", "Total Chapters": 4, "Total Mishnas": 34, "Chapters": [7, 10, 9, 8]},
-  {"Tractate": "Megillah", "Total Chapters": 4, "Total Mishnas": 33, "Chapters": [9, 8, 7, 9]},
-  {"Tractate": "Moed Katan", "Total Chapters": 3, "Total Mishnas": 23, "Chapters": [9, 9, 5]},
-  {"Tractate": "Chagigah", "Total Chapters": 3, "Total Mishnas": 23, "Chapters": [8, 7, 8]}
+ [
+  {"Tractate": "Shabbat", "Total Chapters": 24, "Total Mishnas": 139, "Chapters": [11, 7, 6, 2, 4, 10, 4, 7, 7, 6, 6, 6, 7, 4, 3, 8, 8, 3, 6, 5, 3, 6, 5, 5], "Bavli Pages": 157, "Yerushalmi Pages": 204},
+  {"Tractate": "Eruvin", "Total Chapters": 10, "Total Mishnas": 96, "Chapters": [10, 6, 9, 11, 9, 10, 11, 11, 4, 15], "Bavli Pages": 128, "Yerushalmi Pages": 160},
+  {"Tractate": "Pesachim", "Total Chapters": 10, "Total Mishnas": 89, "Chapters": [7, 8, 8, 9, 10, 6, 13, 8, 11, 9], "Bavli Pages": 123, "Yerushalmi Pages": 155},
+  {"Tractate": "Shekalim", "Total Chapters": 8, "Total Mishnas": 52, "Chapters": [7, 5, 4, 9, 6, 6, 7, 8], "Bavli Pages": 65, "Yerushalmi Pages": 85},
+  {"Tractate": "Yoma", "Total Chapters": 8, "Total Mishnas": 61, "Chapters": [8, 7, 11, 6, 7, 8, 5, 9], "Bavli Pages": 82, "Yerushalmi Pages": 105},
+  {"Tractate": "Sukkah", "Total Chapters": 5, "Total Mishnas": 53, "Chapters": [11, 9, 15, 10, 8], "Bavli Pages": 73, "Yerushalmi Pages": 90},
+  {"Tractate": "Beitzah", "Total Chapters": 5, "Total Mishnas": 42, "Chapters": [10, 10, 8, 7, 7], "Bavli Pages": 56, "Yerushalmi Pages": 72},
+  {"Tractate": "Rosh HaShanah", "Total Chapters": 4, "Total Mishnas": 35, "Chapters": [9, 8, 9, 9], "Bavli Pages": 48, "Yerushalmi Pages": 63},
+  {"Tractate": "Taanit", "Total Chapters": 4, "Total Mishnas": 34, "Chapters": [7, 10, 9, 8], "Bavli Pages": 45, "Yerushalmi Pages": 58},
+  {"Tractate": "Megilah", "Total Chapters": 4, "Total Mishnas": 33, "Chapters": [11, 6, 6, 10], "Bavli Pages": 42, "Yerushalmi Pages": 54},
+  {"Tractate": "Moed Katan", "Total Chapters": 3, "Total Mishnas": 24, "Chapters": [10, 5, 9], "Bavli Pages": 32, "Yerushalmi Pages": 40},
+  {"Tractate": "Chagigah", "Total Chapters": 3, "Total Mishnas": 23, "Chapters": [8, 7, 8], "Bavli Pages": 31, "Yerushalmi Pages": 39}
+]
+
 ]
 
 
