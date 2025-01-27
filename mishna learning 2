@@ -1,133 +1,68 @@
 function updateSpreadsheet() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const sheet = ss.getActiveSheet();
+  const spreadsheetId = "1XdWQqOmaWEwYbM9qWxCb0yRa-HvhnAj1Ny0f_xUNNeY";
+  const ss = SpreadsheetApp.openById(spreadsheetId);
+  const sourceSheet = ss.getSheetByName("Sheet1");
+
+  // Generate a unique sheet name
+  const timestamp = new Date().getTime();
+  const sheetName = `Tractate Information_${timestamp}`;
+  const targetSheet = ss.insertSheet(sheetName);
 
   // Define headers for the sheet
-  const headers = ['Order', 'Tractate', 'Total Chapters', 'Total Mishnas', 'Chapters', 'Bavli', 'Yerushalmi'];
-  sheet.clear(); // Clear the existing content before adding new rows
-  sheet.appendRow(headers);
+  const headers = ['Order', 'Tractate', 'Total Chapters', 'Total Mishnas', 'Chapter', 'Mishnas', 'Bavli', 'Yerushalmi'];
+  targetSheet.appendRow(headers);
 
-  // Corrected data array with all 63 tractates and accurate Talmud information (Zera'im and Mo'ed sections)
-  const data = [
-    {
-      "Order": "Zera'im",
-      "Tractates": [
-        { "Tractate": "Berakhot", "TotalChapters": 9, "TotalMishnas": 57, "Chapters": [6, 8, 7, 8, 6, 7, 7, 8, 8], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Peah", "TotalChapters": 8, "TotalMishnas": 69, "Chapters": [9, 10, 7, 8, 10, 7, 9, 9], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Demai", "TotalChapters": 7, "TotalMishnas": 53, "Chapters": [8, 7, 8, 7, 8, 7, 8], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Kil'ayim", "TotalChapters": 9, "TotalMishnas": 77, "Chapters": [9, 8, 9, 8, 7, 7, 7, 8, 10], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Shevi'it", "TotalChapters": 10, "TotalMishnas": 89, "Chapters": [8, 9, 10, 9, 7, 7, 9, 8, 8, 7], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Terumot", "TotalChapters": 11, "TotalMishnas": 101, "Chapters": [9, 10, 10, 8, 8, 9, 8, 9, 10, 10, 9], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Ma'aserot", "TotalChapters": 5, "TotalMishnas": 40, "Chapters": [8, 7, 8, 8, 9], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Ma'aserSheni", "TotalChapters": 5, "TotalMishnas": 57, "Chapters": [12, 10, 11, 10, 14], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Challah", "TotalChapters": 4, "TotalMishnas": 38, "Chapters": [9, 7, 10, 12], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Orlah", "TotalChapters": 3, "TotalMishnas": 35, "Chapters": [12, 11, 12], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Bikkurim", "TotalChapters": 4, "TotalMishnas": 39, "Chapters": [10, 10, 9, 10], "BavliPages": true, "YerushalmiPages": true }
-      ]
-    },
-    {
-      "Order": "Mo'ed",
-      "Tractates": [
-        { "Tractate": "Shabbat", "TotalChapters": 24, "TotalMishnas": 157, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Eruvin", "TotalChapters": 10, "TotalMishnas": 103, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Pesachim", "TotalChapters": 10, "TotalMishnas": 85, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Shekalim", "TotalChapters": 8, "TotalMishnas": 20, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Yoma", "TotalChapters": 8, "TotalMishnas": 59, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Sukkah", "TotalChapters": 5, "TotalMishnas": 56, "Chapters": [1, 2, 3, 4, 5], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Beitza", "TotalChapters": 5, "TotalMishnas": 42, "Chapters": [1, 2, 3, 4, 5], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Rosh Hashanah", "TotalChapters": 4, "TotalMishnas": 34, "Chapters": [1, 2, 3, 4], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Ta'anit", "TotalChapters": 4, "TotalMishnas": 30, "Chapters": [1, 2, 3, 4], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Megillah", "TotalChapters": 4, "TotalMishnas": 30, "Chapters": [1, 2, 3, 4], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Mo'ed Katan", "TotalChapters": 3, "TotalMishnas": 13, "Chapters": [1, 2, 3], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Chagigah", "TotalChapters": 3, "TotalMishnas": 12, "Chapters": [1, 2, 3], "BavliPages": true, "YerushalmiPages": true }
-      ]
-    },
-    {
-      "Order": "Nashim",
-      "Tractates": [
-        { "Tractate": "Yevamot", "TotalChapters": 12, "TotalMishnas": 128, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Ketubot", "TotalChapters": 10, "TotalMishnas": 111, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Nedarim", "TotalChapters": 9, "TotalMishnas": 68, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Nazir", "TotalChapters": 9, "TotalMishnas": 67, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Sotah", "TotalChapters": 9, "TotalMishnas": 49, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Gittin", "TotalChapters": 9, "TotalMishnas": 72, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Kiddushin", "TotalChapters": 4, "TotalMishnas": 41, "Chapters": [1, 2, 3, 4], "BavliPages": true, "YerushalmiPages": true }
-      ]
-    },
-    {
-      "Order": "Nezikin",
-      "Tractates": [
-        { "Tractate": "Bava Kamma", "TotalChapters": 10, "TotalMishnas": 10, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Bava Metzia", "TotalChapters": 10, "TotalMishnas": 10, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Bava Batra", "TotalChapters": 10, "TotalMishnas": 10, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Sanhedrin", "TotalChapters": 11, "TotalMishnas": 11, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Makkot", "TotalChapters": 3, "TotalMishnas": 3, "Chapters": [1, 2, 3], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Shevu'ot", "TotalChapters": 9, "TotalMishnas": 9, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Eduyot", "TotalChapters": 8, "TotalMishnas": 8, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Avodah Zarah", "TotalChapters": 5, "TotalMishnas": 5, "Chapters": [1, 2, 3, 4, 5], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Horayot", "TotalChapters": 3, "TotalMishnas": 3, "Chapters": [1, 2, 3], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Pirkei Avot", "TotalChapters": 6, "TotalMishnas": 6, "Chapters": [1, 2, 3, 4, 5, 6], "BavliPages": true, "YerushalmiPages": true } 
-      ]
-    },
-    {
-      "Order": "Kodashim",
-      "Tractates": [
-        { "Tractate": "Zevahim", "TotalChapters": 14, "TotalMishnas": 101, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "BavliPages": true, "YerushalmiPages": false },
-        { "Tractate": "Menachot", "TotalChapters": 13, "TotalMishnas": 102, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], "BavliPages": true, "YerushalmiPages": false },
-        { "Tractate": "Chullin", "TotalChapters": 12, "TotalMishnas": 96, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "BavliPages": true, "YerushalmiPages": false },
-        { "Tractate": "Bekhorot", "TotalChapters": 10, "TotalMishnas": 66, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "BavliPages": true, "YerushalmiPages": false },
-        { "Tractate": "Arachin", "TotalChapters": 9, "TotalMishnas": 40, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9], "BavliPages": true, "YerushalmiPages": false },
-        { "Tractate": "Temurah", "TotalChapters": 5, "TotalMishnas": 33, "Chapters": [1, 2, 3, 4, 5], "BavliPages": true, "YerushalmiPages": false },
-        { "Tractate": "Keritot", "TotalChapters": 8, "TotalMishnas": 48, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8], "BavliPages": true, "YerushalmiPages": false },
-        { "Tractate": "Me'ilah", "TotalChapters": 6, "TotalMishnas": 37, "Chapters": [1, 2, 3, 4, 5, 6], "BavliPages": true, "YerushalmiPages": false },
-        { "Tractate": "Tamid", "TotalChapters": 7, "TotalMishnas": 32, "Chapters": [1, 2, 3, 4, 5, 6, 7], "BavliPages": true, "YerushalmiPages": false },
-        { "Tractate": "Middot", "TotalChapters": 5, "TotalMishnas": 16, "Chapters": [1, 2, 3, 4, 5], "BavliPages": true, "YerushalmiPages": false },
-        { "Tractate": "Kinnim", "TotalChapters": 3, "TotalMishnas": 9, "Chapters": [1, 2, 3], "BavliPages": true, "YerushalmiPages": false }
-      ]
-    },
-    {
-      "Order": "Tahorot",
-      "Tractates": [
-        { "Tractate": "Keilim", "TotalChapters": 12, "TotalMishnas": 30, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Oholot", "TotalChapters": 18, "TotalMishnas": 70, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Nega'im", "TotalChapters": 14, "TotalMishnas": 50, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Parah", "TotalChapters": 9, "TotalMishnas": 32, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Tohorot", "TotalChapters": 11, "TotalMishnas": 39, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Mikva'ot", "TotalChapters": 10, "TotalMishnas": 33, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Niddah", "TotalChapters": 9, "TotalMishnas": 34, "Chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Makhshirin", "TotalChapters": 6, "TotalMishnas": 28, "Chapters": [1, 2, 3, 4, 5, 6], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Zavim", "TotalChapters": 6, "TotalMishnas": 33, "Chapters": [1, 2, 3, 4, 5, 6], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Tevul Yom", "TotalChapters": 2, "TotalMishnas": 9, "Chapters": [1, 2], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Yadayim", "TotalChapters": 4, "TotalMishnas": 15, "Chapters": [1, 2, 3, 4], "BavliPages": true, "YerushalmiPages": true },
-        { "Tractate": "Uktzim", "TotalChapters": 3, "TotalMishnas": 10, "Chapters": [1, 2, 3], "BavliPages": true, "YerushalmiPages": true }
-      ]
+  // Function to read tractate data from the source sheet
+  function readTractateData() {
+    const lastRow = sourceSheet.getLastRow();
+    const tractates = [];
+
+    for (let i = 2; i <= lastRow; i++) {
+      const tractateName = sourceSheet.getRange(i, 1).getValue();
+      const lastColumn = sourceSheet.getLastColumn();
+      const chapterDataRange = sourceSheet.getRange(i, 2, 1, lastColumn - 1);
+      const chapterDataValues = chapterDataRange.getValues()[0].filter(value => value !== "");
+
+      const totalChapters = chapterDataValues.length;
+      const totalMishnas = chapterDataValues.reduce((sum, value) => sum + value, 0);
+
+      tractates.push({
+        "Tractate": tractateName,
+        "Chapters": chapterDataValues,
+        "TotalChapters": totalChapters,
+        "TotalMishnas": totalMishnas
+      });
     }
-  ];
 
-  // Iterate through each order and tractate
- data.forEach(order => {
-    order.Tractates.forEach(tractate => {
-      // Add a row for each tractate with its summary
-      sheet.appendRow([
-        order.Order,
+    return tractates;
+  }
+
+  // Function to populate the target sheet with tractate data
+  function populateTargetSheet(data) {
+    data.forEach(tractate => {
+      targetSheet.appendRow([
+        "", // Order (to be filled later)
         tractate.Tractate,
         tractate.TotalChapters,
-        tractate.TotalMishnas,
-        Array.from({ length: tractate.Chapters.length }, (v, i) => `Chapter ${i + 1} - ${tractate.Chapters[i]}`).join(', '),
-        tractate.BavliPages ? "✔" : "",
-        tractate.YerushalmiPages ? "✔" : ""
+        tractate.TotalMishnas
       ]);
 
-      // Add chapter rows
       tractate.Chapters.forEach((mishnaCount, chapterIndex) => {
-        const chapterNumber = chapterIndex + 1;
-        const row = [order.Order, tractate.Tractate, chapterNumber, mishnaCount, "", "", ""];
-        sheet.appendRow(row);
-
-        // Insert checkboxes for Bavli and Yerushalmi
-        sheet.getRange(sheet.getLastRow(), 6).insertCheckboxes();
-        sheet.getRange(sheet.getLastRow(), 7).insertCheckboxes();
+        const chapterRow = [null, null, null, null, `Chapter ${chapterIndex + 1}`, mishnaCount, "", ""];
+        targetSheet.appendRow(chapterRow);
       });
+
+      // Conditionally append a blank row after each tractate with chapters
+      if (tractate.Chapters.length > 0) {
+        targetSheet.appendRow([tractate.Chapters.length]);
+      }
     });
-  });
+  }
+
+  // Read tractate data and populate the target sheet
+  const tractateData = readTractateData();
+  populateTargetSheet(tractateData);
 }
+
+// Update the spreadsheet (assuming "Zera'im" is the first order)
+updateSpreadsheet();
